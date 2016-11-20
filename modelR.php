@@ -8,13 +8,13 @@
 		private $Idres;
 		private $Id;
 		
-		public function __construct($dest="",$nbrP="",$assur="",$Idres="",$Id="")
+		public function __construct()
 		{
-				$this->dest=$dest;
-				$this->nbrP=$nbrP;
-				$this->assur=$assur;
-				$this->Idres=$Idres;
-				$this->Id=$Id;
+				$this->dest="";
+				$this->nbrP="";
+				$this->assur="";
+				$this->Idres="";
+				$this->Id="";
 		}
 		
 		public function getdest()
@@ -25,7 +25,7 @@
 		{
 			return $this->nbrP;
 		}
-		public function assur()
+		public function getassur()
 		{
 			return $this->assur;
 		}
