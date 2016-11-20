@@ -23,11 +23,11 @@
 			<table>
 				<tr>
 					<td>Destination :</td>
-					<td><input type ="text" name="dest[]" maxlength== "30"></td>
+					<td><input type ="text" name="dest" maxlength== "30"></td>
 				</tr>
 				<tr>
 					<td>Nombre de places: </td>
-					<td><input type="text" name="nbrP[]" > <br/> </td>
+					<td><input type="text" name="nbrP" > <br/> </td>
 				</tr>
 				<tr>
 					<td>Assurance annulation:</td>
@@ -36,7 +36,7 @@
 			</table>
 			<br/>
 		
-			<input type="submit" name="next" value="Etape Suivante" />
+			<input type="submit" name="next1" value="Etape Suivante" />
 			<input type="reset" name="cancel" value="Annuler la reservation" />
 		</form>
 	</div>
