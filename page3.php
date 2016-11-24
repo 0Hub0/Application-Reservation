@@ -14,16 +14,16 @@
 				<table>
 					<tr>
 						<td>Destination:</td>
-						<td><?php echo $_SESSION['dest'];?></td>
+						<td><?php $reserv->getdest();?></td>
 					</tr>
 					<tr>
 						<td>Nombre de places:</td>
-						<td><?php echo $_SESSION["nbrP"];?></td>
+						<td><?php $reserv->getnbrP();?></td>
 					</tr>
 					
 					
 					<?php
-						for ($i=0;$i<$_SESSION['nbrP'];$i++)
+						for ($i=0;$i<$reserv->getnbrP();$i++)
 						{
 							$j=$i+1;
 							echo "
@@ -31,23 +31,24 @@
 											<table>
 												<tr>
 													<td>Nom:</td>
-													<td>".$name[$i]."</td>
+													<td>".$perso->getname()[$i]."</td>
 												</tr>
 												
 												<tr>
 													<td>Age:</td>
-													<td>".$age[$i]."</td>
+													<td>".$perso->getage()[$i]."</td>
 												</tr>
 											</table>
 									</fieldset>
 								";
 						}
+						//??-getname()[i]
 					?>
-	
+				
 					
 					<tr>
 						<td>Assurance</td>
-						<td><?php echo $_SESSION['assur'];?></td>
+						<td><?php $reserv->getassur();?></td>
 					</tr>
 				</table>
 			
