@@ -14,7 +14,7 @@
 		<form method="POST" ACTION="newController.php" >
 		<input type='hidden' name='view2' value=2>	
 		<?php
-			for ($i=0;$i<$_SESSION['nbrP'];$i++)
+			for ($i=0;$i<<?php$reserv->getnbrP()[0];?>;$i++)
 			{
 				$j=$i+1;
 				echo "
