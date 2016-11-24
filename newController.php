@@ -144,9 +144,9 @@
 				{	
 					if($errorView1a==false && $errorView1b==false && $errorView1c==false)
 					{
-						$_SESSION['dest']=$dest1;
-						$_SESSION['nbrP']=$nbrP1;
-						$_SESSION['assur']=$assur;
+						$_SESSION['dest']=$dest1;	//ou $reserv->setdest() ?????
+						$_SESSION['nbrP']=$nbrP1;	//ou $reserv->setnbrP()
+						$_SESSION['assur']=$assur;	//ou $reserv->setassur()
 						//$_SESSION['stat']
 						include "page2.php";
 					}
