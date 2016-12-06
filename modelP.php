@@ -6,12 +6,12 @@ class person
 		private $Idres;
 		private $Id;
 		
-		public function __construct($name="",$age="",$Idres="",$Id="")
+		public function __construct()
 		{
-			$this->name=$name;
-			$this->age=$age;
-			$this->Idres=$Idres;
-			$this->Id=$Id;
+			$this->name="";
+			$this->age="";
+			$this->Idres="";
+			$this->Id="";
 		}
 		
 		public function getname() 
