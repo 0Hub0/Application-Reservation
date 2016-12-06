@@ -19,7 +19,7 @@
 	<br/><br/>
 	
 		<form method="POST" ACTION="newController.php" >
-		<input type='hidden' name='view1' value=1>	
+		<input type="hidden" name='view1' value=1>	
 			<table>
 				<tr>
 					<td>Destination :</td>
