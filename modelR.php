@@ -8,7 +8,7 @@
 		private $Idres;
 		private $Id;
 		
-		public function __construct()
+			public function __construct()
 		{
 				$this->dest="";
 				$this->nbrP="";
