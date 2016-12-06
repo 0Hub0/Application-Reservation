@@ -3,20 +3,21 @@
 	include "modelR.php";
 	include "modelP.php";
 	
-	$reserv= new reservation();
+	$reserv = new reservation();
 	$pers= new person();
 	
 	
-	/*
+	
+	
 	//Instantiate Destination-NumberofPlace-Status of insurance
-	$reserv -> setdest($_SESSION["dest"]);
-	$reserv -> setnbrP($_SESSION["nbrP"]);
-	$reserv -> setassur($_SESSION["assur"]);
+	//$reserv -> setdest($_SESSION["dest"]);
+	//$reserv -> setnbrP($_SESSION["nbrP"]);
+	//$reserv -> setassur($_SESSION["assur"]);
 	//$reserv -> s
 	
 	//Instantiate Passenger - Age - Trip ID
 	
-	
+	/*
 	$pers -> setname($_SESSION["Trav"]);
 	$pers -> setage($_SESSION["ageTrav"]);
 	$pers -> setIDres ($_SESSION["Idres"]);
@@ -38,15 +39,17 @@
 	
 	
 	$price=0;
-	$reserv;
+	//$reserv;
 	
 	
 	//Verify if session already exists
 	if (isset($_SESSION['reservation']))
 	{
-		$reserv=$_SESSION["reservation"];
+		$reserv= new reservation;
+		$_SESSION["res"]= $reserv;
 		echo "!!!!!session existe !!!!A enlever!!!!";
 		
+		/*
 		$reserv -> setdest($_SESSION["dest"]);
 		$reserv -> setnbrP($_SESSION["nbrP"]);
 		$reserv -> setassur($_SESSION["assur"]);
@@ -55,16 +58,16 @@
 		$pers -> setname($_SESSION["Trav"]);
 		$pers -> setage($_SESSION["ageTrav"]);
 		$pers -> setIDres ($_SESSION["Idres"]);
-		
+		*/
 		
 	}
 	else
 	{
-		$reserv = new reservation();
+		$reserv = $_SESSION["res"];
+		
+		
 		echo"session n'existe pas  donc on a fabriqué !!!A enlever!!!";
-		
-		
-		
+			
 		
 	}
 	
@@ -76,7 +79,7 @@
 	if(!isset($_POST['view1']) && !isset($_POST[' view2']) && !isset($_POST[' view3']) && !isset($_POST[' view4']))
 	{
 		include 'page1.php';
-		echo'test';
+		echo'test1';
 		/*
 		$reserv->getdest();
 		$reserv->getnbrP();
@@ -84,20 +87,27 @@
 		*/
 		
 	}
-	else
-	{
+	
 		switch(true)
 		{
 			//??
 			//Verify the entry of the reservation view is not empty and put the value in post
 			//to param destination and place number
-			case isset($_POST['view1']):
-			{
-				$dest1=$_POST['dest'];
-				$nbrP1=$_POST['nbrP'];
+			case isset($_POST['view1']) && !isset($_POST['view2']) && !isset($_POST['view3']) && !isset($_POST['view4']) :
+				
+			
+				$dest1=$_POST["dest"];
+				$nbrP1=$_POST["nbrP"];
+				
+				
+				
+				//$_SESSION["dest"]=$_POST["dest"];
+				//$_SESSION["nbrP"]=$_POST["nbrP"];
+				
+				
 				
 				//Put the status of assurance
-				if(isset($_POST['assur']) && $_POST['assur'] ==true )
+				if(isset($_POST["assur"]) && $_POST["assur"] ==true )
 				{
 					$assur='OUI';
 				}
@@ -107,12 +117,13 @@
 				}
 				
 				//Verify the entry dest is neither empty and  neither a number otherwise there's an error
-				if($_POST['dest']=='' || is_numeric(!$_POST['dest']))
+				if($_POST['dest']=='' || is_numeric($_POST['dest']))
 				{
 					$errorView1a=true;
 					$mess1='Veuillez entre une destination';
 					echo'aa';
 				}
+				
 				
 				//Verify the enty nbrP is not empty 
 				if($_POST['nbrP']=='' )
@@ -130,6 +141,7 @@
 						$mess2="Veuillez entrer un nombre supérieur à 0 et inférieur à 10";
 						
 					}
+					
 				}
 				
 				// If there's an error, stay on the reservation view
@@ -144,11 +156,19 @@
 				{	
 					if($errorView1a==false && $errorView1b==false && $errorView1c==false)
 					{
-						$_SESSION['dest']=$dest1;	//ou $reserv->setdest() ?????
-						$_SESSION['nbrP']=$nbrP1;	//ou $reserv->setnbrP()
-						$_SESSION['assur']=$assur;	//ou $reserv->setassur()
+						$_SESSION["dest"]=$dest1;	//ou $reserv->setdest() ?????
+						$_SESSION["nbrP"]=$nbrP1;	//ou $reserv->setnbrP()
+						$_SESSION["assur"]=$assur;	//ou $reserv->setassur()
+						
+						
+						
+						
 						//$_SESSION['stat']
+						
+					
+						
 						include "page2.php";
+						
 					}
 				}
 				else
@@ -161,29 +181,49 @@
 						
 					}
 				}	
-
-			}
-			break;
+				
 			
+			break;		
 			
 			case isset($_POST['view2']):
-			{
-				if (isset($_POST['next2']))
+			
+					
+				$name1=$_POST["nom"];
+				$age1=$_POST["age"];
+				
+				
+				
+				echo 'vue 2 ok';
+				if (isset($_POST["next2"]))
 				{
+					
+		
 					// For each passenger
 					for($i=0;$i<$_SESSION['nbrP'];$i++)
 					{
-						if (is_numeric($_POST['name'][$i]) || $_POST['name'][$i]=='')
+						//$_SESSION['name']=$_POST['nom'][$i];
+						if (is_numeric($_POST['nom']) || $_POST['nom']=='')
 						{
 							$errorView2a=true;
 							$mess3='Veuillez entrer un nom pour chaque personne';
 						}
+						else
+						{
+							$pers->setname($name1[0]);
+							
+						}
+					
 						
-						if ($_POST['age'][$i]=='' || $_POST['age'][$i]<0 )
+						if ($_POST['age'][$i]=='' ||  !is_numeric($_POST['age'][$i]) || $_POST['age'][$i]<0 )
 						{
 							$errorView2b==true;
 							$mess4="Veuillez un âge supérieurr à 0";
 						}
+						else
+						{
+							$pers->setage($age1[0]);
+						}
+							
 					}
 					
 					if($errorView2a==true || $errorView2b==true)
@@ -192,10 +232,21 @@
 					}
 					else
 					{
-						$_SESSION['ageTrav']=$_POST['age'];
-						$_SESSION['Trav']=$_POST['name'];
+						
+						
+						
+						$_SESSION['age']=$age1;
+						$_SESSION['name']=$name1;
+						
+						$reserv->setdest($_SESSION["dest"]);
+						$reserv->setnbrP($_SESSION["nbrP"]);
+						
+						
+						//$pers->setname($name1[0]);
+						
 						include 'page3.php';
 					}
+					include 'page3.php';
 				}
 				else
 				{
@@ -211,12 +262,15 @@
 						include 'page1.php';
 					}
 				}
-				break;
+				
 					
 		
-			}
+			
+			break;
+			
 			case isset($_POST['view3']):
-			{
+			
+				echo 'vue3 ok';
 				if (isset($_POST['next3']))
 				{
 					//Compute the price
@@ -235,12 +289,12 @@
 					if($_SESSION['assur'] =='OUI')
 					{
 						$price=$price+20;
-						$_SESSION['assur']=1;
+						$_SESSION["assur"]=1;
 						$reserv -> setassur(1);
 					}
 					else
 					{
-						$_SESSION['assur']=0;
+						$_SESSION["assur"]=0;
 						$reserv -> setassur(0);
 					}
 					
@@ -259,22 +313,24 @@
 						include 'page2.php';
 					}	
 				}
-			}
+			
 			break;
 				
 				
 				
 			
-			case isset($_POST['view4']):
-			{
+			case isset($_POST["view4"]):
+			
+				echo 'vue4 OK';
+				
 				session_destroy();
-				//include 'page1.php';
-			}
+				include 'page1.php';
+			
 			
 			break;
 		}
 		
-	}
+	
 
 
 
