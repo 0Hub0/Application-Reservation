@@ -5,45 +5,63 @@
 		<LINK rel=stylesheet type "css" href="style.css">
 	</head>
 	<body>
-		<h1>Confirmation des réservations</h1>
+		<h1>Validation des réservations</h1>
 		<div>
-		<form method='POST' action='newController.php'>
-		<input type="hidden" name='view4' value=4>
-			Votre demande a bien ete enregistrée.<br/>
+			
+			<form method='POST' action='newController.php'>
+			<input type="hidden" name='view3' value=3>
+			
 			<?php
-			$price=0;
-					//Compute the price
+				echo"
+				<table>
+					<tr>
+						<td>Destination:</td>
+						<td>".$reserv->getdest()."</td>
+					</tr>
+					<tr>
+						<td>Nombre de places:</td>
+						<td>".$reserv->getnbrP()."</td>
 					
-					
-					for($i=0;$i<$reserv->getnbrP();$i++)
+					</tr>
+				
+				";
+									
+				for ($i=0;$i<$_SESSION["nbrP"];$i++)
 					{
-						if($pers->getage()[$i]<=12)
-						{
-							$price+=10;
-							
-							echo'Agé de moins de 12 ans';
-							
+							//$j=$i+1;
+						echo "
+								
+									<tr>
+										<td>Nom:</td>
+										<td>".$pers->getname()[$i]."</td>
+									</tr>
+												
+									<tr>
+										<td>Age:</td>
+										<td>".$pers->getage()[$i]."</td>
+									</tr>
+											
+								";
 						}
-						else
-						{
-							$price+=15;
-							echo'agé de plus de 12 ans';
-						}
-					}
+						
+				
+					echo "
+					<tr>
+						<td>Assurance:</td>
+						<td>".$reserv->getassur()."</td>
+					</tr>
+					</table>
+					";
 					
-					if($reserv->getassur() == 'OUI')
-					{
-						$price+=20;
-					}
-					
+				?>
 			
-
-			echo "Merci de bien vouloir verser la somme de ".$price." euros sur le compte 000-000000-00";
-			?>
-			<br/><br/>
-			<input type='submit' value ="Retour à la page d'acceuil">
+				
+				<input type="submit" name="next3" value="Confirmer">
+				<input type="submit" name="before3" value="Retour à la page précédente" />
+				<input type="reset" name="cancel" value="Annuler la réservation" />
+				
 			
-		</form>
+			</form>
 		</div>
 	</body>
 </html>
