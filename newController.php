@@ -45,8 +45,8 @@
 	//Verify if session already exists
 	if (isset($_SESSION['reservation']))
 	{
-		$reserv= new reservation;
-		$_SESSION["res"]= $reserv;
+		$reserv = $_SESSION["res"];
+		
 		echo "!!!!!session existe !!!!A enlever!!!!";
 		
 		/*
@@ -63,8 +63,9 @@
 	}
 	else
 	{
-		$reserv = $_SESSION["res"];
 		
+		$reserv= new reservation;
+		$_SESSION["res"]= $reserv;
 		
 		echo"session n'existe pas  donc on a fabriqué !!!A enlever!!!";
 			
@@ -107,7 +108,7 @@
 				
 				
 				//Put the status of assurance
-				if(isset($_POST["assur"]) && $_POST["assur"] ==true )
+				if(isset($_POST["assur"]))
 				{
 					$assur='OUI';
 				}
@@ -158,6 +159,11 @@
 					{
 						$_SESSION["dest"]=$dest1;	//ou $reserv->setdest() ?????
 						$_SESSION["nbrP"]=$nbrP1;	//ou $reserv->setnbrP()
+						
+						
+						
+						
+						
 						$_SESSION["assur"]=$assur;	//ou $reserv->setassur()
 						
 						
@@ -209,11 +215,17 @@
 						}
 						else
 						{
-							$pers->setname($name1[0]);
+							for ($i=0;$i<$_SESSION["nbrP"];$i++)
+							{
+								
+								$pers->setname($name1)[$i];
+							}
+							
 							
 						}
 					
-						
+						for ($i=0;$i<$_SESSION["nbrP"];$i++)
+						{
 						if ($_POST['age'][$i]=='' ||  !is_numeric($_POST['age'][$i]) || $_POST['age'][$i]<0 )
 						{
 							$errorView2b==true;
@@ -221,7 +233,12 @@
 						}
 						else
 						{
-							$pers->setage($age1[0]);
+							
+							
+								$pers->setage($age1)[$i];
+							
+							
+						}
 						}
 							
 					}
@@ -237,16 +254,18 @@
 						
 						$_SESSION['age']=$age1;
 						$_SESSION['name']=$name1;
+						//$_SESSION['assur']=$assur1;
+						
 						
 						$reserv->setdest($_SESSION["dest"]);
 						$reserv->setnbrP($_SESSION["nbrP"]);
-						
+						$reserv->setassur($_SESSION["assur"]);
 						
 						//$pers->setname($name1[0]);
 						
 						include 'page3.php';
 					}
-					include 'page3.php';
+					
 				}
 				else
 				{
@@ -271,33 +290,35 @@
 			case isset($_POST['view3']):
 			
 				echo 'vue3 ok';
+				
 				if (isset($_POST['next3']))
 				{
+					echo $pers->getage();
+					
+					$price=0;
 					//Compute the price
-					for($i=0;$i<$_SESSION['nbrP'];$i++)
+					for($i=0;$i<$reserv->getnbrP();$i++)
 					{
-						if($_SESSION['ageTrav'][$i]<=12)
+						if($pers->getage()[$i]<=12)
 						{
-							$price=$price+10;
+							$price+=10;
+							
+							
 						}
 						else
 						{
-							$price=price+15;
+							$price+=15;
 						}
 					}
 					
-					if($_SESSION['assur'] =='OUI')
+					if($reserv->getassur() =='OUI')
 					{
-						$price=$price+20;
-						$_SESSION["assur"]=1;
-						$reserv -> setassur(1);
-					}
-					else
-					{
-						$_SESSION["assur"]=0;
-						$reserv -> setassur(0);
+						$price+=20;
+						
 					}
 					
+					$reserv->setprice($price);
+					echo $reserv->getprice();
 				include 'page4.php';
 				}
 				else
