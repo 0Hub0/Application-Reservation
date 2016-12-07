@@ -11,55 +11,49 @@
 			<form method='POST' action='newController.php'>
 			<input type="hidden" name='view3' value=3>
 			
+			<?php
+				echo"
 				<table>
 					<tr>
 						<td>Destination:</td>
-						<td><?php echo $reserv->getdest();?></td>
+						<td>".$reserv->getdest()."</td>
 					</tr>
 					<tr>
 						<td>Nombre de places:</td>
-						<td><?php echo $reserv->getnbrP();?></td>
+						<td>".$reserv->getnbrP()."</td>
+					
 					</tr>
-					
-					
-					<?php
-						
-						
-						
-						//echo $reserv->getdest();
-						
-					
-						
-						
-						for ($i=0;$i<$_SESSION["nbrP"];$i++)
-						{
+				
+				";
+									
+				for ($i=0;$i<$_SESSION["nbrP"];$i++)
+					{
 							//$j=$i+1;
-							echo "
-									<fieldset>
-											<table>
-												<tr>
-													<td>Nom:</td>
-													<td>".$pers->getname()[$i]."</td>
-												</tr>
+						echo "
+								
+									<tr>
+										<td>Nom:</td>
+										<td>".$pers->getname()[$i]."</td>
+									</tr>
 												
-												<tr>
-													<td>Age:</td>
-													<td>".$pers->getage()[$i]."</td>
-												</tr>
-											</table>
-									</fieldset>
+									<tr>
+										<td>Age:</td>
+										<td>".$pers->getage()[$i]."</td>
+									</tr>
+											
 								";
 						}
-						//??-getname()[i]
-					?>
+						
 				
-					
+					echo "
 					<tr>
 						<td>Assurance:</td>
-						<td><?php $_SESSION["assur"];?></td>
+						<td>".$reserv->getassur()."</td>
 					</tr>
+					</table>
+					";
 					
-				</table>
+				?>
 			
 				
 				<input type="submit" name="next3" value="Confirmer">
