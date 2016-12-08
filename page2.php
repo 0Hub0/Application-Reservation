@@ -1,3 +1,13 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>
+	Reservation
+	</title>
+	<LINK rel=stylesheet type "css" href="style.css">
+	
+</head>
+
 <body>
 	<h1>Detail des Reservations</h1> <br/>
 	<div>
