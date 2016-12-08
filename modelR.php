@@ -37,6 +37,7 @@
 		}
 		
 		
+		
 		public function setdest($dest)
 		{
 			$this->dest =$dest;
@@ -51,7 +52,7 @@
 		}
 		public function setprice($price)
 		{
-			$this->assur=$price;
+			$this->price=$price;
 		}
 		
 	
