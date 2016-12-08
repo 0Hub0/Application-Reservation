@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Assurance annulation:</td>
-					<td><input type ="checkbox" name ="assur"><br/></td>
+					<td><input type ="checkbox" name ="assur" <br/></td>
 				</tr>
 			</table>
 			<br/>
