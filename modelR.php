@@ -7,6 +7,7 @@
 		private $assur;
 		private $Idres;
 		private $Id;
+		private $price;
 		
 			public function __construct()
 		{
