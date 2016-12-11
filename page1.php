@@ -14,6 +14,20 @@
 	
 	
 	<div>
+	
+		<?php
+			if($mess1 !=NULL)
+			{
+				echo "<font color='red'>".$mess1."</font></br>";
+			}
+			if($mess2 !=NULL)
+			{
+				echo "<font color='red'>".$mess2."</font></br>";
+			}
+			
+		?>
+
+	
 	Le prix de la place est de 10 euros jusqu'à 12 ans et ensuite de 15 euros.<br/>
 	Le prix de l'assurance annulation est de 20 euros quel que soit le nombre de voyageurs.
 	<br/><br/>
