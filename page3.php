@@ -26,7 +26,7 @@
 				
 				";
 									
-				for ($i=0;$i<$_SESSION["nbrP"];$i++)
+				for ($i=0;$i<$reserv->getnbrP();$i++)
 					{
 							//$j=$i+1;
 						echo "
