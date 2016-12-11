@@ -3,28 +3,23 @@
 	include "modelR.php";
 	include "modelP.php";
 	
+	/*
+	// put the value of destination, number of place , statut of assurance  in model reservation
+	$reserv ->setdest($_SESSION['dest']);
+	$reserv -> setnbrP($_SESSION['nbrP']);
+	$reserv -> setassur($_SESSION['assur']);
+	//$reserv -> setStatus($_SESSION['status']);
+	
+	// put the value of passenger, age , trip Id  in model personne
+	$pers = new Personne();
+	$pers ->  setname($_SESSION['Voyageur']);
+	$pers ->  setage($_SESSION['AgeVoyageur']);
+	$pers ->  setIdres($_SESSION['reservationId']);
+	*/
+
+	
 	$reserv = new reservation();
 	$pers= new person();
-	
-	
-	
-	
-	//Instantiate Destination-NumberofPlace-Status of insurance
-	//$reserv -> setdest($_SESSION["dest"]);
-	//$reserv -> setnbrP($_SESSION["nbrP"]);
-	//$reserv -> setassur($_SESSION["assur"]);
-	//$reserv -> s
-	
-	//Instantiate Passenger - Age - Trip ID
-	
-	/*
-	$pers -> setname($_SESSION["Trav"]);
-	$pers -> setage($_SESSION["ageTrav"]);
-	$pers -> setIDres ($_SESSION["Idres"]);
-	*/
-	
-	
-	
 	
 	$mess1=NULL;
 	$mess2=NULL;
@@ -38,75 +33,35 @@
 	$errorView2b=false;
 	
 	
-	$price=0;
-	//$reserv;
-	
-	
 	//Verify if session already exists
 	if (isset($_SESSION['reservation']))
 	{
-		$reserv = $_SESSION["res"];
-		
-		echo "!!!!!session existe !!!!A enlever!!!!";
-		
-		/*
-		$reserv -> setdest($_SESSION["dest"]);
-		$reserv -> setnbrP($_SESSION["nbrP"]);
-		$reserv -> setassur($_SESSION["assur"]);
-		
-		
-		$pers -> setname($_SESSION["Trav"]);
-		$pers -> setage($_SESSION["ageTrav"]);
-		$pers -> setIDres ($_SESSION["Idres"]);
-		*/
-		
+		$reserv = $_SESSION["res"];		
 	}
 	else
 	{
-		
 		$reserv= new reservation;
 		$_SESSION["res"]= $reserv;
-		
-		echo"session n'existe pas  donc on a fabriqué !!!A enlever!!!";
-			
-		
+
 	}
 	
-	
-	
+
 	
 	//Verify that the data from the view doesn't exist
-	
-	if(!isset($_POST['view1']) && !isset($_POST[' view2']) && !isset($_POST[' view3']) && !isset($_POST[' view4']))
+	if(!isset($_POST['view1']) && !isset($_POST['view2']) && !isset($_POST['view3']) && !isset($_POST['view4']))
 	{
 		include 'page1.php';
-		echo'test1';
-		/*
-		$reserv->getdest();
-		$reserv->getnbrP();
-		$reserv->getassur();
-		*/
-		
 	}
 	
 		switch(true)
 		{
-			//??
 			//Verify the entry of the reservation view is not empty and put the value in post
 			//to param destination and place number
-			case isset($_POST['view1']) && !isset($_POST['view2']) && !isset($_POST['view3']) && !isset($_POST['view4']) :
-				
-			
+			case isset($_POST['view1']) :
+			{	
 				$dest1=$_POST["dest"];
 				$nbrP1=$_POST["nbrP"];
-				
-				
-				
-				//$_SESSION["dest"]=$_POST["dest"];
-				//$_SESSION["nbrP"]=$_POST["nbrP"];
-				
-				
-				
+								
 				//Put the status of assurance
 				if(isset($_POST["assur"]))
 				{
@@ -121,8 +76,7 @@
 				if($_POST['dest']=='' || is_numeric($_POST['dest']))
 				{
 					$errorView1a=true;
-					$mess1='Veuillez entre une destination';
-					echo'aa';
+					$mess1='Veuillez entrer une destination';
 				}
 				
 				
@@ -131,12 +85,11 @@
 				{
 					$errorView1b=true;
 					$mess2= "Veuillez entrer un nombre";
-					
 				}
 				else
 				{
 					// Verify the entry is a number between 1 and 10
-					if (!is_numeric($_POST['nbrP']) || $_POST['nbrP'] <1 || $_POST['nbrP'] > 10 )
+					if (!is_numeric($_POST["nbrP"]) || $_POST["nbrP"] <1 || $_POST["nbrP"] > 10 )
 					{
 						$errorView1c=true;
 						$mess2="Veuillez entrer un nombre supérieur à 0 et inférieur à 10";
@@ -157,22 +110,10 @@
 				{	
 					if($errorView1a==false && $errorView1b==false && $errorView1c==false)
 					{
-						$_SESSION["dest"]=$dest1;	//ou $reserv->setdest() ?????
-						$_SESSION["nbrP"]=$nbrP1;	//ou $reserv->setnbrP()
-						
-						
-						
-						
-						
-						$_SESSION["assur"]=$assur;	//ou $reserv->setassur()
-						
-						
-						
-						
-						//$_SESSION['stat']
-						
-					
-						
+						$_SESSION["dest"]=$dest1;	
+						$_SESSION["nbrP"]=$nbrP1;	
+						$_SESSION["assur"]=$assur;	
+
 						include "page2.php";
 						
 					}
@@ -187,28 +128,21 @@
 						
 					}
 				}	
-				
-			
+			}
 			break;		
 			
 			case isset($_POST['view2']):
-			
-					
+			{
 				$name1=$_POST["nom"];
 				$age1=$_POST["age"];
 				
-				
-				
-				echo 'vue 2 ok';
 				if (isset($_POST["next2"]))
 				{
-					
-		
 					// For each passenger
 					for($i=0;$i<$_SESSION['nbrP'];$i++)
 					{
 						//$_SESSION['name']=$_POST['nom'][$i];
-						if (is_numeric($_POST['nom']) || $_POST['nom']=='')
+						if (is_numeric($_POST['nom'][$i]) || $_POST['nom'][$i]=='')
 						{
 							$errorView2a=true;
 							$mess3='Veuillez entrer un nom pour chaque personne';
@@ -217,28 +151,22 @@
 						{
 							for ($i=0;$i<$_SESSION["nbrP"];$i++)
 							{
-								
 								$pers->setname($name1)[$i];
 							}
-							
-							
+								
 						}
 					
 						for ($i=0;$i<$_SESSION["nbrP"];$i++)
 						{
-						if ($_POST['age'][$i]=='' ||  !is_numeric($_POST['age'][$i]) || $_POST['age'][$i]<0 )
-						{
-							$errorView2b==true;
-							$mess4="Veuillez un âge supérieurr à 0";
-						}
-						else
-						{
-							
-							
+							if ($_POST['age'][$i]=='' ||  !is_numeric($_POST['age'][$i]) || $_POST['age'][$i]<1 )
+							{
+								$errorView2b==true;
+								$mess4="Veuillez entrer un âge supérieurr à 0";
+							}
+							else
+							{
 								$pers->setage($age1)[$i];
-							
-							
-						}
+							}
 						}
 							
 					}
@@ -247,24 +175,21 @@
 					{
 						include 'page2.php';
 					}
-					else
-					{
-						
-						
-						
-						$_SESSION['age']=$age1;
-						$_SESSION['name']=$name1;
-						//$_SESSION['assur']=$assur1;
-						
-						
-						$reserv->setdest($_SESSION["dest"]);
-						$reserv->setnbrP($_SESSION["nbrP"]);
-						$reserv->setassur($_SESSION["assur"]);
-						
-						//$pers->setname($name1[0]);
-						
-						include 'page3.php';
-					}
+					
+					if(isset($_POST['next2']))
+						{	
+							if($errorView2a==false && $errorView2b==false)
+							{
+								$_SESSION['age']=$age1;	
+								$_SESSION['name']=$name1;	
+								$reserv->setdest($_SESSION["dest"]);
+								$reserv->setnbrP($_SESSION["nbrP"]);
+								$reserv->setassur($_SESSION["assur"]);
+								
+								$pers->setage($_SESSION['age']);
+								include 'page3.php';
+							}	
+						}
 					
 				}
 				else
@@ -276,49 +201,43 @@
 						break;
 					}
 					
-					if(isset($_POST['before']))
+					if(isset($_POST['before2']))
 					{
 						include 'page1.php';
 					}
-				}
-				
-					
+				}		
 		
-			
+			}	
 			break;
 			
 			case isset($_POST['view3']):
-			
-				echo 'vue3 ok';
-				
+			{
 				if (isset($_POST['next3']))
 				{
-					echo $pers->getage();
-					
 					$price=0;
 					//Compute the price
-					for($i=0;$i<$reserv->getnbrP();$i++)
+					for($i=0;$i<$_SESSION['nbrP'];$i++)
 					{
-						if($pers->getage()[$i]<=12)
+						if($_SESSION['age'][$i]<=12)
 						{
-							$price+=10;
-							
-							
+							$price=$price+10;
 						}
 						else
 						{
-							$price+=15;
+							$price=$price+15;
 						}
 					}
 					
-					if($reserv->getassur() =='OUI')
+					if($_SESSION['assur'] =='OUI')
 					{
-						$price+=20;
+						$price=$price+20;
 						
 					}
-					
-					$reserv->setprice($price);
-					echo $reserv->getprice();
+					$_SESSION['price']=$price;
+					$reserv->setprice($_SESSION['price']);
+				
+				
+				
 				include 'page4.php';
 				}
 				else
@@ -329,25 +248,132 @@
 						include 'page1.php';
 					}
 					
-					if(isset($_POST['before2']))
+					if(isset($_POST['before3']))
 					{
 						include 'page2.php';
 					}	
 				}
-			
+			}	
 			break;
 				
-				
-				
-			
+
 			case isset($_POST["view4"]):
+			{	
+				$reserv->setdest($_SESSION["dest"]);
+				$reserv->setnbrP($_SESSION["nbrP"]);
+				$reserv->setassur($_SESSION["assur"]);
+				$reserv->setprice($_SESSION['price']);
+				
+				$pers->setage($_SESSION['age']);
+				$pers->setname($_SESSION['name']);
+				
+				
+				// Connexion et sélection de la base
+				$mysqli = new mysqli("localhost", "root", "test","trip") or
+				die("Could not select database");
+				if ($mysqli->connect_errno) 
+				{
+					echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")
+					" . $mysqli->connect_error;
+				}
+				
+				// Exécuter des requêtes SQL
+				$query = "SELECT * FROM reservation";
+				$result = $mysqli->query($query) or 
+				die("Query failed (Exécuter requêtes SQL)");
+				
+				if ($result->num_rows == 0) 
+				{
+					echo "Aucune ligne trouvée, rien à afficher.";
+					//exit;
+				}
+				
+				// Insertion d'un enregistrement
+				$sql = "INSERT INTO `reservation` (`Id`,`Destination`,`Assurance`,`Prix`,`Nom`,`Age`)
+				VALUES (NULL, '".$reserv->getdest()."', '".$reserv->getassur()."', '".$reserv->getprice()."', '".$pers->getname()[0]."','".$pers->getage()[0]."');";
+				
+				if ($mysqli->query($sql) === TRUE) 
+				{
+					echo "Record updated successfully";
+					$id_insert = $mysqli->insert_id;
+				} 
+				else 
+				{
+					echo "Error inserting record: " . $mysqli->error;
+				}	
+				
+				
 			
-				echo 'vue4 OK';
+			// Afficher les résultats****************
+				
+				// Affichage des entêtes de colonnes
+				echo "<table>\n<tr>";
+				
+				while ($finfo = $result->fetch_field())
+				{ 
+					echo '<th>'. $finfo->name .'</th>'; 
+				}
+				
+				echo "</tr>\n";
+				
+				// Afficher des résultats en HTML
+				while ($line = $result->fetch_assoc()) 
+				{
+					echo "\t<tr>\n";
+					foreach ($line as $col_value) 
+					{
+						echo "\t\t<td>$col_value</td>\n";
+					}
+					echo "\t</tr>\n";
+				}
+				echo "</table>\n";
+				
+				
+				/*
+				// Récupération du résultat sous forme d'un tableau associatif
+				$result = $mysqli->query($query) or die("Query failed (Récupération résult talbeau)");
+				while ($line = $result->fetch_array(MYSQLI_ASSOC))
+				{
+					echo $line['lastname'].'<BR>';
+				}
+				*/
+				
+				// Libération des résultats
+				$result->close();
+				// Fermeture de la connexion								
+				
+				
+												
+					
+
+					
+						
+				/*
+				Boucle implémentant la dataBase
+				for($i=0;$i<$_SESSION['nbrP'];$i++)
+				{  		
+		
+						// insert from model person the data person into database 
+						$sqlinsert2 = "INSERT INTO `personne` (`id`, `nom`, `age`, `reservationId`)VALUES ('', '".$pers->getname()."',".$pers->getage().",".$pers -> getId().");";
+						
+						if ($connection->query($sqlinsert2) === TRUE)
+						{
+							
+						}
+						else 
+						{
+							//if error of record person data do to the view resrvation 
+							//include 'page1.php';
+							echo 'FALSE2';
+						}
+						
+				};
+				*/
+				//??????????????????????????????
 				
 				session_destroy();
 				include 'page1.php';
-			
-			
+			}
 			break;
 		}
 		
