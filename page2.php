@@ -11,11 +11,23 @@
 <body>
 	<h1>Detail des Reservations</h1> <br/>
 	<div>
+		<?php
+			if($mess3 !=NULL)
+			{
+				echo "<font color='red'>".$mess3."</font></br>";
+			}
+			
+			if($mess4 !=NULL)
+			{
+				echo "<font color='red'>".$mess4."</font></br>";
+			}
+		?>
+	
 		<form method="POST" ACTION="newController.php" >
 		<input type="hidden" name='view2' value=2>	
 		
 		<?php
-			for ($i=0;$i<$_POST['nbrP'];$i++)
+			for ($i=0;$i<$_SESSION["nbrP"];$i++)
 			{
 				//$j=$i+1;
 				echo "
