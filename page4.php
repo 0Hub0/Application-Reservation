@@ -9,8 +9,8 @@
 		<div>
 		<form method='POST' action='newController.php'>
 		<input type="hidden" name='view4' value=4>
-			Votre demande a bien ete enregistrée.<br/>	
-			Merci de bien vouloir verser la somme de <?php echo $reserv->getprice() ?> euros sur le compte 000-000000-00";
+			Votre demande a bien été enregistrée.<br/>	
+			Merci de bien vouloir verser la somme de <?php echo $reserv->getprice() ?> euros sur le compte 000-000000-00
 			
 			<br/><br/>
 			<input type='submit' value ="Retour à la page d'acceuil">
