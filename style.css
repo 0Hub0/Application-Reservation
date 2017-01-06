@@ -1,0 +1,40 @@
+	h1
+		{
+			font-size:x-large;
+			font-size:200%;
+		}
+	div
+		{
+			margin-left:30px;
+		}
+	
+	table, th
+		{
+			
+			border: 1px solid black;
+		}
+	h2
+	{	
+		font-size:100%;
+		border: 1px solid black;
+
+	}
+	tx
+	{
+		max-width:300px;
+		border-radius:8px;
+		
+	}
+	
+	fieldset
+	{
+		max-width:300px;
+		border-radius:8px;
+		
+	}
+	tx
+	{
+		padding:5px 0; 
+		
+	}
+	
